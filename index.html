@@ -1,0 +1,2866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Speaking & Pronunciation Lab</title>
+
+<style>
+
+:root{
+  --primary:#173f5f;
+  --secondary:#20639b;
+  --accent:#f6c85f;
+  --success:#16823b;
+  --danger:#c62828;
+  --warning:#ef8b00;
+  --light:#f4f7fb;
+  --dark:#17202a;
+  --white:#ffffff;
+  --border:#d7dee8;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--dark);
+}
+
+header{
+  background:linear-gradient(135deg,#173f5f,#20639b);
+  color:white;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+header h1{
+  margin:0;
+  font-size:28px;
+}
+
+header p{
+  margin:7px 0 0;
+  opacity:.92;
+}
+
+.container{
+  width:min(1000px,94%);
+  margin:25px auto;
+}
+
+.card{
+  background:white;
+  border-radius:16px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.hidden{
+  display:none !important;
+}
+
+h2,h3{
+  color:var(--primary);
+}
+
+button{
+  border:none;
+  border-radius:10px;
+  padding:12px 18px;
+  font-size:16px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+  opacity:.94;
+}
+
+.primary{
+  background:var(--secondary);
+  color:white;
+}
+
+.success{
+  background:var(--success);
+  color:white;
+}
+
+.warning{
+  background:var(--warning);
+  color:white;
+}
+
+.danger{
+  background:var(--danger);
+  color:white;
+}
+
+.secondary{
+  background:#e9eef5;
+  color:#173f5f;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+}
+
+/* HOME */
+
+.home-title{
+  text-align:center;
+  font-size:30px;
+  color:var(--primary);
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.feature{
+  background:#f7faff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+}
+
+.feature strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--primary);
+}
+
+/* STUDENT */
+
+.student-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+.student-card{
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:18px;
+  background:white;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.student-card:hover{
+  border-color:var(--secondary);
+  background:#f4f9ff;
+}
+
+.student-name{
+  font-size:20px;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+.student-id{
+  font-size:13px;
+  color:#666;
+  margin-top:5px;
+}
+
+/* DIAGNOSTIC */
+
+.topbar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.student-badge{
+  background:#e8f1fa;
+  color:var(--primary);
+  padding:9px 14px;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+.progress-wrapper{
+  margin:20px 0;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:7px;
+  font-weight:bold;
+}
+
+.progress{
+  width:100%;
+  height:13px;
+  background:#e1e7ef;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  background:linear-gradient(90deg,#20639b,#16823b);
+  width:0%;
+  transition:.3s;
+}
+
+.question-number{
+  text-align:center;
+  color:#666;
+  margin-top:15px;
+}
+
+.sound-box{
+  text-align:center;
+  padding:25px 10px;
+}
+
+.sound-symbol{
+  font-size:58px;
+  font-weight:bold;
+  color:var(--secondary);
+  margin:10px;
+}
+
+.word{
+  font-size:42px;
+  font-weight:bold;
+  color:#17202a;
+  margin:10px 0;
+}
+
+.ipa{
+  font-size:23px;
+  color:#555;
+  margin:10px;
+}
+
+.meta{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:15px 0;
+}
+
+.tag{
+  background:#edf2f7;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:14px;
+}
+
+.listen-area{
+  text-align:center;
+  margin:20px 0;
+}
+
+.mic-area{
+  text-align:center;
+  margin:20px 0;
+}
+
+.mic-button{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  font-size:42px;
+  background:#20639b;
+  color:white;
+  box-shadow:0 5px 18px rgba(32,99,155,.3);
+}
+
+.mic-button.recording{
+  background:#c62828;
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.06);
+  }
+  100%{
+    transform:scale(1);
+  }
+}
+
+.status{
+  text-align:center;
+  margin:15px 0;
+  min-height:25px;
+  font-weight:bold;
+}
+
+.attempt{
+  text-align:center;
+  color:#666;
+  margin:5px;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.result-message{
+  padding:16px;
+  border-radius:12px;
+  margin:15px 0;
+  text-align:center;
+  line-height:1.6;
+}
+
+.result-success{
+  background:#e7f7ec;
+  color:#12632e;
+  border:1px solid #a9dfb8;
+}
+
+.result-try{
+  background:#fff5e5;
+  color:#814c00;
+  border:1px solid #f2cb91;
+}
+
+.result-skip{
+  background:#eef2f7;
+  color:#475569;
+  border:1px solid #ccd5e0;
+}
+
+.transcript-box{
+  background:#f7f7f7;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  margin-top:10px;
+  text-align:center;
+}
+
+.permanent-skip{
+  margin-top:12px;
+}
+
+/* RESULTS */
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+  margin:20px 0;
+}
+
+.summary-box{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+  background:#fafcff;
+}
+
+.summary-number{
+  font-size:32px;
+  font-weight:bold;
+  color:var(--secondary);
+}
+
+.summary-label{
+  color:#666;
+  margin-top:5px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+th,td{
+  padding:10px;
+  border:1px solid var(--border);
+  text-align:left;
+}
+
+th{
+  background:#edf3f9;
+  color:var(--primary);
+}
+
+.status-good{
+  color:var(--success);
+  font-weight:bold;
+}
+
+.status-warning{
+  color:var(--warning);
+  font-weight:bold;
+}
+
+.status-danger{
+  color:var(--danger);
+  font-weight:bold;
+}
+
+.queue-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  margin:8px 0;
+  background:#fafafa;
+}
+
+.small{
+  font-size:13px;
+  color:#666;
+}
+
+.section-title{
+  margin-top:30px;
+  border-bottom:2px solid #e3eaf2;
+  padding-bottom:8px;
+}
+
+.notice{
+  background:#fff8df;
+  border-left:5px solid #efb000;
+  padding:15px;
+  margin:15px 0;
+  border-radius:8px;
+  line-height:1.6;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  header h1{
+    font-size:22px;
+  }
+
+  .container{
+    width:96%;
+    margin:15px auto;
+  }
+
+  .card{
+    padding:17px;
+  }
+
+  .sound-symbol{
+    font-size:48px;
+  }
+
+  .word{
+    font-size:34px;
+  }
+
+  .ipa{
+    font-size:20px;
+  }
+
+  .mic-button{
+    width:90px;
+    height:90px;
+    font-size:35px;
+  }
+
+  table{
+    font-size:13px;
+  }
+
+  th,td{
+    padding:7px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>🎙️ English Speaking & Pronunciation Lab</h1>
+
+  <p>
+    British English • Speaking • Pronunciation • Fluency
+  </p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- ================= HOME ================= -->
+
+<section id="homeScreen" class="card">
+
+  <h2 class="home-title">
+    English Speaking & Pronunciation Lab
+  </h2>
+
+  <p style="text-align:center;">
+    <strong>Diagnostic Pronunciation Test</strong>
+  </p>
+
+  <div class="notice">
+
+    This diagnostic test is <strong>not a pass/fail examination</strong>.
+    It identifies sounds and words that may need additional practice.
+
+    <br><br>
+
+    You can <strong>Retry</strong> a difficult word or
+    <strong>Skip & Continue</strong> at any time.
+
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="feature">
+      <strong>🇬🇧 British English</strong>
+      British English model pronunciation
+    </div>
+
+    <div class="feature">
+      <strong>🎧 Listen</strong>
+      Hear the model pronunciation
+    </div>
+
+    <div class="feature">
+      <strong>🎙️ Speak</strong>
+      Say the word into the microphone
+    </div>
+
+    <div class="feature">
+      <strong>📊 Analyse</strong>
+      Record pronunciation results
+    </div>
+
+    <div class="feature">
+      <strong>🔁 Retry</strong>
+      Try difficult words again
+    </div>
+
+    <div class="feature">
+      <strong>⏭️ Skip</strong>
+      Continue without getting stuck
+    </div>
+
+  </div>
+
+  <div class="notice" role="status" style="margin-top:18px;"><strong>External TEST build:</strong> microphone and diagnostic flow only. Learner login and spreadsheet saving are intentionally disabled until the secure backend bridge is implemented.</div>
+
+  <div style="text-align:center;margin-top:25px;">
+
+    <button class="primary"
+            onclick="startDiagnostic()">
+
+      ▶ Start Diagnostic Test
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- Authenticated diagnostic: the learner is identified by the active login session. -->
+
+<!-- ================= TEST SCREEN ================= -->
+
+<section id="testScreen" class="card hidden">
+
+  <div class="topbar">
+
+    <div class="student-badge"
+         id="studentBadge">
+
+    </div>
+
+    <button class="secondary"
+            onclick="confirmExit()">
+
+      Exit Test
+
+    </button>
+
+  </div>
+
+
+  <div class="progress-wrapper">
+
+    <div class="progress-info">
+
+      <span id="progressText">
+        Question 1 of 40
+      </span>
+
+      <span id="progressPercent">
+        3%
+      </span>
+
+    </div>
+
+    <div class="progress">
+
+      <div id="progressBar"
+           class="progress-bar">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="question-number"
+       id="questionNumber">
+
+    Question 1
+
+  </div>
+
+
+  <div class="sound-box">
+
+    <div class="sound-symbol"
+         id="soundSymbol">
+
+      /ɪ/
+
+    </div>
+
+    <div class="word"
+         id="targetWord">
+
+      ship
+
+    </div>
+
+    <div class="ipa"
+         id="targetIPA">
+
+      /ʃɪp/
+
+    </div>
+
+    <div class="meta">
+
+      <span class="tag"
+            id="positionTag">
+        Medial
+      </span>
+
+      <span class="tag"
+            id="difficultyTag">
+        Easy
+      </span>
+
+      <span class="tag"
+            id="contrastTag">
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- MODEL AUDIO -->
+
+  <div class="listen-area">
+
+    <button class="primary"
+            onclick="speakModel()">
+
+      🔊 Listen to British Model
+
+    </button>
+
+  </div>
+
+
+  <!-- MICROPHONE -->
+
+  <div class="mic-area">
+
+    <button id="micButton"
+            class="mic-button"
+            onclick="startRecognition()">
+
+      🎙️
+
+    </button>
+
+    <div class="small">
+      Click the microphone and say the word.
+    </div>
+
+  </div>
+
+
+  <div id="status"
+       class="status">
+
+    Ready.
+
+  </div>
+
+
+  <div id="attemptCounter"
+       class="attempt">
+
+    Attempts: 0
+
+  </div>
+
+
+  <div id="transcriptBox"
+       class="transcript-box hidden">
+
+    <strong>Computer heard:</strong>
+
+    <span id="transcriptText"></span>
+
+  </div>
+
+
+  <div id="resultMessage"></div>
+
+
+  <!-- RETRY / NEXT -->
+
+  <div id="decisionControls"
+       class="controls hidden">
+
+    <button id="retryButton"
+            class="warning"
+            onclick="retryCurrentWord()">
+
+      🔁 Retry
+
+    </button>
+
+    <button id="nextButton"
+            class="success hidden"
+            onclick="nextQuestion()">
+
+      ➡ Next
+
+    </button>
+
+    <button id="reviewButton"
+            class="secondary hidden"
+            onclick="markCurrentForReview()">
+
+      📌 Mark for Review & Continue
+
+    </button>
+
+  </div>
+
+
+  <!-- PERMANENT SKIP -->
+
+  <div class="controls permanent-skip">
+
+    <button type="button" class="secondary"
+            onclick="skipCurrentWord()">
+
+      ⏭️ Skip & Continue
+
+    </button>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- ================= RESULTS ================= -->
+
+<section id="resultsScreen" class="card hidden">
+
+  <h2>🎉 Diagnostic Test Complete</h2>
+
+  <div id="resultStudent"
+       class="student-badge">
+  </div>
+
+
+  <div class="notice">
+
+    This diagnostic result is intended to identify
+    areas for further practice.
+
+    <strong>
+      It is not a pass/fail judgement of pronunciation.
+    </strong>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <div class="summary-box">
+
+      <div id="totalResult"
+           class="summary-number">
+        40
+      </div>
+
+      <div class="summary-label">
+        Total Items
+      </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+      <div id="recognisedResult"
+           class="summary-number">
+        0
+      </div>
+
+      <div class="summary-label">
+        Recognised
+      </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+      <div id="skippedResult"
+           class="summary-number">
+        0
+      </div>
+
+      <div class="summary-label">
+        Skipped
+      </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+      <div id="failedResult"
+           class="summary-number">
+        0
+      </div>
+
+      <div class="summary-label">
+        Needs Review
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <h3 class="section-title">
+    📊 Diagnostic Summary
+  </h3>
+
+  <div id="diagnosticSummary"></div>
+
+
+  <h3 class="section-title">
+    🎯 Priority Practice
+  </h3>
+
+  <div id="priorityPractice"></div>
+
+
+  <h3 class="section-title">
+    🔁 Practice Queue
+  </h3>
+
+  <div id="practiceQueue"></div>
+  <div id="savePanel" class="notice">
+  <strong>TEST MODE — Results are not saved</strong>
+  <p id="saveStatus" role="status" aria-live="polite">
+    This external GitHub Pages build is for microphone and diagnostic-flow testing only. Results remain in this browser page and are not sent to the spreadsheet.
+  </p>
+</div>
+
+ 
+  <div class="controls">
+
+    <button class="primary"
+            onclick="startAgain()">
+
+      🔄 Start Again
+
+    </button>
+
+    <button class="secondary"
+            onclick="showHome()">
+
+      🏠 Home
+
+    </button>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   ENGLISH SPEAKING & PRONUNCIATION LAB
+   BRITISH ENGLISH DIAGNOSTIC
+   ============================================================ */
+
+
+/* ================= DIAGNOSTIC ITEMS ================= */
+
+const diagnosticItems = [
+
+  /* SHORT & LONG VOWELS */
+
+  {
+    sound:"/ɪ/",
+    word:"ship",
+    ipa:"/ʃɪp/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/iː/",
+    word:"sheep",
+    ipa:"/ʃiːp/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/e/",
+    word:"bed",
+    ipa:"/bed/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/æ/",
+    word:"bad",
+    ipa:"/bæd/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/ʌ/",
+    word:"cup",
+    ipa:"/kʌp/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/ɒ/",
+    word:"hot",
+    ipa:"/hɒt/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/ʊ/",
+    word:"full",
+    ipa:"/fʊl/",
+    position:"Medial",
+    difficulty:"Medium"
+  },
+
+  {
+    sound:"/uː/",
+    word:"fool",
+    ipa:"/fuːl/",
+    position:"Medial",
+    difficulty:"Medium"
+  },
+
+  {
+    sound:"/ɑː/",
+    word:"car",
+    ipa:"/kɑː/",
+    position:"Medial",
+    difficulty:"Medium"
+  },
+
+  {
+    sound:"/ɜː/",
+    word:"bird",
+    ipa:"/bɜːd/",
+    position:"Medial",
+    difficulty:"Medium"
+  },
+
+
+  /* DIPHTHONGS */
+
+  {
+    sound:"/eɪ/",
+    word:"day",
+    ipa:"/deɪ/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/aɪ/",
+    word:"time",
+    ipa:"/taɪm/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/ɔɪ/",
+    word:"boy",
+    ipa:"/bɔɪ/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/əʊ/",
+    word:"go",
+    ipa:"/ɡəʊ/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/aʊ/",
+    word:"now",
+    ipa:"/naʊ/",
+    position:"Medial",
+    difficulty:"Easy"
+  },
+
+  {
+    sound:"/eə/",
+    word:"hair",
+    ipa:"/heə/",
+    position:"Medial",
+    difficulty:"Medium"
+  },
+
+
+  /* DIFFICULT CONSONANTS */
+
+  {
+    sound:"/θ/",
+    word:"three",
+    ipa:"/θriː/",
+    position:"Initial",
+    difficulty:"Medium"
+  },
+
+  {
+    sound:"/ð/",
+    word:"they",
+    ipa:"/ðeɪ/",
+    position:"Initial",
+    difficulty:"Medium"
+  },
+
+  {
+    sound:"/v/",
+    word:"van",
+    ipa:"/væn/",
+    position:"Initial",
+    difficulty:"Medium",
+    contrast:"w"
+  },
+
+  {
+    sound:"/w/",
+    word:"wet",
+    ipa:"/wet/",
+    position:"Initial",
+    difficulty:"Medium",
+    contrast:"vet"
+  },
+
+  {
+    sound:"/l/",
+    word:"lake",
+    ipa:"/leɪk/",
+    position:"Initial",
+    difficulty:"Medium",
+    contrast:"rake"
+  },
+
+  {
+    sound:"/r/",
+    word:"right",
+    ipa:"/raɪt/",
+    position:"Initial",
+    difficulty:"Medium",
+    contrast:"l"
+  },
+
+  {
+    sound:"/ʃ/",
+    word:"shoe",
+    ipa:"/ʃuː/",
+    position:"Initial",
+    difficulty:"Medium",
+    contrast:"sue"
+  },
+
+  {
+    sound:"/ʒ/",
+    word:"measure",
+    ipa:"/ˈmeʒə/",
+    position:"Medial",
+    difficulty:"Challenge"
+  },
+
+  {
+    sound:"/tʃ/",
+    word:"chair",
+    ipa:"/tʃeə/",
+    position:"Initial",
+    difficulty:"Medium"
+  },
+
+  {
+    sound:"/dʒ/",
+    word:"jam",
+    ipa:"/dʒæm/",
+    position:"Initial",
+    difficulty:"Medium"
+  },
+
+
+  /* MINIMAL PAIRS */
+
+  {
+    sound:"/ɪ/",
+    word:"sit",
+    ipa:"/sɪt/",
+    position:"Medial",
+    difficulty:"Medium",
+    contrast:"seat"
+  },
+
+  {
+    sound:"/iː/",
+    word:"seat",
+    ipa:"/siːt/",
+    position:"Medial",
+    difficulty:"Medium",
+    contrast:"sit"
+  },
+
+  {
+    sound:"/θ/",
+    word:"thin",
+    ipa:"/θɪn/",
+    position:"Initial",
+    difficulty:"Challenge",
+    contrast:"tin"
+  },
+
+  {
+    sound:"/t/",
+    word:"tin",
+    ipa:"/tɪn/",
+    position:"Initial",
+    difficulty:"Challenge",
+    contrast:"thin"
+  },
+
+  {
+    sound:"/v/",
+    word:"vine",
+    ipa:"/vaɪn/",
+    position:"Initial",
+    difficulty:"Challenge",
+    contrast:"wine"
+  },
+
+  {
+    sound:"/w/",
+    word:"wine",
+    ipa:"/waɪn/",
+    position:"Initial",
+    difficulty:"Challenge",
+    contrast:"vine"
+  },
+
+  {
+    sound:"/l/",
+    word:"light",
+    ipa:"/laɪt/",
+    position:"Initial",
+    difficulty:"Challenge",
+    contrast:"right"
+  },
+
+  {
+    sound:"/r/",
+    word:"road",
+    ipa:"/rəʊd/",
+    position:"Initial",
+    difficulty:"Challenge",
+    contrast:"load"
+  },
+
+
+  /* SOUND POSITIONS */
+
+  {
+    sound:"/θ/",
+    word:"healthy",
+    ipa:"/ˈhelθi/",
+    position:"Medial",
+    difficulty:"Challenge"
+  },
+
+  {
+    sound:"/θ/",
+    word:"bath",
+    ipa:"/bɑːθ/",
+    position:"Final",
+    difficulty:"Challenge"
+  },
+
+  {
+    sound:"/ð/",
+    word:"mother",
+    ipa:"/ˈmʌðə/",
+    position:"Medial",
+    difficulty:"Challenge"
+  },
+
+  {
+    sound:"/ð/",
+    word:"smooth",
+    ipa:"/smuːð/",
+    position:"Final",
+    difficulty:"Challenge"
+  },
+
+  {
+    sound:"/v/",
+    word:"seven",
+    ipa:"/ˈsevən/",
+    position:"Medial",
+    difficulty:"Medium"
+  },
+
+  {
+    sound:"/ŋ/",
+    word:"sing",
+    ipa:"/sɪŋ/",
+    position:"Final",
+    difficulty:"Medium"
+  }
+
+];
+
+
+/* ================= STATE ================= */
+
+let currentStudent = null;
+let currentLearnerType = "LOCAL_TEST";
+let currentSessionToken = "";
+let diagnosticRunId = "";
+let diagnosticSaveInProgress = false;
+let diagnosticSaved = false;
+
+let currentIndex = 0;
+
+let currentAttempts = 0;
+
+// Count only target-word mismatches for the Needs Review threshold.
+let currentMismatchAttempts = 0;
+
+let currentTranscript = "";
+
+let recognitionActive = false;
+
+let recognitionHandled = false;
+
+let recognitionGotResult = false;
+
+// Ignore a late onend event caused by deliberately stopping the microphone.
+let ignoreLateRecognitionEnd = false;
+// Identifies which question owns the active microphone recording.
+let recognitionQuestionIndex = -1;
+
+let testResults = [];
+
+// Prevent one diagnostic item from being recorded more than once.
+let finalizedIndices = new Set();
+
+const MAX_MISMATCH_ATTEMPTS = 3;
+
+let skippedItems = [];
+
+let retryItems = [];
+
+let practiceQueue = [];
+
+
+/* ================= SPEECH RECOGNITION ================= */
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+let recognition = null;
+
+if(SpeechRecognition){
+
+  recognition = new SpeechRecognition();
+
+  recognition.lang = "en-GB";
+
+  recognition.continuous = false;
+
+  recognition.interimResults = false;
+
+  recognition.maxAlternatives = 3;
+
+}
+
+
+/* ================= NORMALISE ================= */
+
+function normaliseText(text){
+
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[.,!?;:'"“”‘’]/g,"")
+    .replace(/\s+/g," ");
+
+}
+
+
+/* ================= SCREENS ================= */
+
+function hideAllScreens(){
+
+  document
+    .getElementById("homeScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("testScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("resultsScreen")
+    .classList.add("hidden");
+
+}
+
+
+function showHome(){
+
+  hideAllScreens();
+
+  document
+    .getElementById("homeScreen")
+    .classList.remove("hidden");
+
+}
+
+
+function startAuthenticatedDiagnostic(){
+  startDiagnostic();
+}
+
+/* ================= START DIAGNOSTIC ================= */
+
+function startDiagnostic(){
+
+  currentStudent = { id: "LOCAL-TEST", name: "Microphone Test", className: "" };
+  diagnosticRunId = "local_diag_" + Date.now() + "_" + Math.random().toString(36).slice(2,8);
+  diagnosticSaveInProgress = false;
+  diagnosticSaved = false;
+
+  currentIndex = 0;
+
+  currentAttempts = 0;
+
+  currentMismatchAttempts = 0;
+
+  currentTranscript = "";
+
+  recognitionActive = false;
+
+  recognitionHandled = false;
+
+  recognitionGotResult = false;
+
+  testResults = [];
+
+  finalizedIndices = new Set();
+
+  skippedItems = [];
+
+  retryItems = [];
+
+  practiceQueue = [];
+
+  hideAllScreens();
+
+  document
+    .getElementById("testScreen")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("studentBadge")
+    .textContent =
+    `${currentStudent.name} • ${currentStudent.id}`;
+
+  loadQuestion();
+
+}
+
+
+/* ================= LOAD QUESTION ================= */
+
+function loadQuestion(){
+
+  stopRecognitionIfNeeded();
+
+  const item =
+    diagnosticItems[currentIndex];
+
+  currentAttempts = 0;
+
+  currentMismatchAttempts = 0;
+
+  currentTranscript = "";
+
+  document.getElementById("reviewButton").classList.add("hidden");
+
+  recognitionActive = false;
+
+  recognitionHandled = false;
+
+  recognitionGotResult = false;
+
+  document
+    .getElementById("questionNumber")
+    .textContent =
+    `Question ${currentIndex + 1}`;
+
+  document
+    .getElementById("progressText")
+    .textContent =
+    `Question ${currentIndex + 1} of ${diagnosticItems.length}`;
+
+  const percent =
+    Math.round(
+      ((currentIndex + 1) /
+      diagnosticItems.length) * 100
+    );
+
+  document
+    .getElementById("progressPercent")
+    .textContent =
+    `${percent}%`;
+
+  document
+    .getElementById("progressBar")
+    .style.width =
+    `${percent}%`;
+
+  document
+    .getElementById("soundSymbol")
+    .textContent =
+    item.sound;
+
+  document
+    .getElementById("targetWord")
+    .textContent =
+    item.word;
+
+  document
+    .getElementById("targetIPA")
+    .textContent =
+    item.ipa;
+
+  document
+    .getElementById("positionTag")
+    .textContent =
+    item.position;
+
+  document
+    .getElementById("difficultyTag")
+    .textContent =
+    item.difficulty;
+
+  const contrastTag =
+    document.getElementById("contrastTag");
+
+  if(item.contrast){
+
+    contrastTag.textContent =
+      `Contrast: ${item.contrast}`;
+
+    contrastTag.classList.remove("hidden");
+
+  }else{
+
+    contrastTag.textContent = "";
+
+    contrastTag.classList.add("hidden");
+
+  }
+
+  document
+    .getElementById("attemptCounter")
+    .textContent =
+    "Attempts: 0";
+
+  document
+    .getElementById("status")
+    .textContent =
+    "Ready. Listen to the model, then speak.";
+
+  document
+    .getElementById("transcriptBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("resultMessage")
+    .innerHTML = "";
+
+  document
+    .getElementById("decisionControls")
+    .classList.add("hidden");
+
+  document
+    .getElementById("retryButton")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("nextButton")
+    .classList.add("hidden");
+
+  resetRecordButton();
+
+}
+
+
+/* ================= MODEL AUDIO ================= */
+
+function speakModel(){
+
+  if(!("speechSynthesis" in window)){
+
+    document
+      .getElementById("status")
+      .textContent =
+      "Speech synthesis is not supported in this browser.";
+
+    return;
+
+  }
+
+  speechSynthesis.cancel();
+
+  const item =
+    diagnosticItems[currentIndex];
+
+  const utterance =
+    new SpeechSynthesisUtterance(
+      item.word
+    );
+
+  const voices =
+    speechSynthesis.getVoices();
+
+  const britishVoice =
+    voices.find(
+      voice =>
+      voice.lang &&
+      voice.lang.toLowerCase()
+      .startsWith("en-gb")
+    );
+
+  if(britishVoice){
+
+    utterance.voice =
+      britishVoice;
+
+  }
+
+  utterance.lang = "en-GB";
+
+  utterance.rate = 0.78;
+
+  utterance.pitch = 1;
+
+  speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* Load voices when browser provides them */
+
+if("speechSynthesis" in window){
+
+  speechSynthesis.onvoiceschanged =
+    function(){
+
+      speechSynthesis.getVoices();
+
+    };
+
+}
+
+
+/* ================= START RECOGNITION ================= */
+
+function startRecognition(){
+
+  if(!recognition){
+
+    alert(
+      "Speech recognition is not supported in this browser. Please use Google Chrome or Microsoft Edge."
+    );
+
+    return;
+
+  }
+
+  if(recognitionActive){
+
+    return;
+
+  }
+
+  speechSynthesis.cancel();
+
+  currentTranscript = "";
+
+  recognitionHandled = false;
+
+  recognitionGotResult = false;
+
+  recognitionActive = true;
+  recognitionQuestionIndex = currentIndex;
+
+  const mic =
+    document.getElementById("micButton");
+
+  mic.classList.add("recording");
+
+  mic.textContent = "⏹️";
+
+  document
+    .getElementById("status")
+    .textContent =
+    "Listening... Say the word clearly.";
+
+  document
+    .getElementById("transcriptBox")
+    .classList.add("hidden");
+
+  try{
+
+    recognition.start();
+
+  }catch(error){
+
+    console.log(error);
+
+    recognitionActive = false;
+
+    resetRecordButton();
+
+    showRecognitionProblem(
+      "The microphone could not be started."
+    );
+
+  }
+
+}
+
+
+/* ================= RECOGNITION RESULT ================= */
+
+if(recognition){
+
+  recognition.onresult =
+    function(event){
+
+      // Ignore delayed results from a recording started on an earlier question.
+      if(recognitionQuestionIndex !== currentIndex || finalizedIndices.has(currentIndex)){
+        return;
+      }
+
+      recognitionGotResult = true;
+
+      recognitionHandled = true;
+
+      let bestTranscript = "";
+
+      if(
+        event.results &&
+        event.results.length
+      ){
+
+        const alternatives =
+          event.results[
+            event.results.length - 1
+          ];
+
+        if(alternatives){
+
+          bestTranscript =
+            alternatives[0]
+            .transcript
+            .trim();
+
+        }
+
+      }
+
+      currentTranscript =
+        bestTranscript;
+
+      recognitionActive = false;
+
+      resetRecordButton();
+
+      if(!currentTranscript){
+
+        showRecognitionProblem(
+          "No clear speech result was received."
+        );
+
+        return;
+
+      }
+
+      document
+        .getElementById("transcriptBox")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("transcriptText")
+        .textContent =
+        `"${currentTranscript}"`;
+
+      checkTranscript();
+
+    };
+
+
+  /* ================= ERROR ================= */
+
+  recognition.onerror =
+    function(event){
+
+      // A late error must not overwrite the state of the next question.
+      if(recognitionQuestionIndex !== currentIndex || finalizedIndices.has(currentIndex)){
+        return;
+      }
+
+      console.log(
+        "Speech recognition error:",
+        event.error
+      );
+
+      recognitionActive = false;
+
+      recognitionHandled = true;
+
+      resetRecordButton();
+
+      let message =
+        "The speech could not be recognised.";
+
+      if(event.error === "no-speech"){
+
+        message =
+          "No speech was detected.";
+
+      }
+
+      else if(event.error === "audio-capture"){
+
+        message =
+          "The microphone could not capture your voice.";
+
+      }
+
+      else if(event.error === "not-allowed"){
+
+        message =
+          "Microphone permission was not allowed.";
+
+      }
+
+      else if(event.error === "network"){
+
+        message =
+          "Speech recognition needs an internet connection.";
+
+      }
+
+      showRecognitionProblem(message);
+
+    };
+
+
+  /* ================= END ================= */
+
+  recognition.onend =
+    function(){
+
+      // Ignore late end events from a recording that no longer owns this question.
+      if(recognitionQuestionIndex !== currentIndex){
+        return;
+      }
+
+      recognitionActive = false;
+
+      resetRecordButton();
+
+      // Skip an onend generated by Skip/Next/exit, not by a failed recording.
+      if(ignoreLateRecognitionEnd){
+        ignoreLateRecognitionEnd = false;
+        return;
+      }
+
+      /*
+        IMPORTANT:
+        onerror may be followed by onend.
+        We do not want to count the same
+        event twice.
+      */
+
+      if(
+        !recognitionGotResult &&
+        !recognitionHandled
+      ){
+
+        recognitionHandled = true;
+
+        showRecognitionProblem(
+          "No speech result was received."
+        );
+
+      }
+
+    };
+
+}
+
+
+/* ================= RECOGNITION PROBLEM ================= */
+
+function showRecognitionProblem(message){
+
+  currentAttempts++;
+
+  document
+    .getElementById("attemptCounter")
+    .textContent =
+    `Attempts: ${currentAttempts}`;
+
+  document
+    .getElementById("status")
+    .textContent =
+    message;
+
+  document
+    .getElementById("resultMessage")
+    .innerHTML = `
+
+      <div class="result-message result-try">
+
+        <strong>
+          ⚠️ Speech not recognised
+        </strong>
+
+        <br><br>
+
+        ${message}
+
+        <br><br>
+
+        This does <strong>not necessarily mean
+        your pronunciation is wrong.</strong>
+
+        <br>
+
+        Try again, or use
+        <strong>Skip & Continue</strong>.
+
+      </div>
+
+  `;
+
+  document
+    .getElementById("decisionControls")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("retryButton")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("nextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ================= CHECK TRANSCRIPT ================= */
+
+function checkTranscript(){
+
+  const item =
+    diagnosticItems[currentIndex];
+
+  const expected =
+    normaliseText(item.word);
+
+  const heard =
+    normaliseText(currentTranscript);
+
+  if(heard === expected){
+
+    handleCorrect();
+
+  }else{
+
+    handleMismatch();
+
+  }
+
+}
+
+
+/* ================= FINALISE ONE ITEM ================= */
+
+function finaliseCurrentItem(status, transcript = currentTranscript){
+
+  const item = diagnosticItems[currentIndex];
+
+  if(finalizedIndices.has(currentIndex)){
+    return false;
+  }
+
+  finalizedIndices.add(currentIndex);
+
+  testResults.push({
+    index: currentIndex,
+    sound: item.sound,
+    word: item.word,
+    ipa: item.ipa,
+    position: item.position,
+    attempts: currentAttempts + (status === "recognised" ? 1 : 0),
+    status,
+    transcript: transcript || ""
+  });
+
+  return true;
+}
+
+
+/* ================= CORRECT ================= */
+
+function handleCorrect(){
+
+  const item =
+    diagnosticItems[currentIndex];
+
+  if(!finaliseCurrentItem("recognised", currentTranscript)){
+    return;
+  }
+
+  document.getElementById("reviewButton").classList.add("hidden");
+
+  document
+    .getElementById("status")
+    .textContent =
+    "Good! The word was recognised.";
+
+  document
+    .getElementById("resultMessage")
+    .innerHTML = `
+
+      <div class="result-message result-success">
+
+        <strong>✅ Recognised</strong>
+
+        <br>
+
+        The computer recognised the word
+        as <strong>${item.word}</strong>.
+
+      </div>
+
+  `;
+
+  document
+    .getElementById("decisionControls")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("retryButton")
+    .classList.add("hidden");
+
+  document
+    .getElementById("nextButton")
+    .classList.remove("hidden");
+
+}
+
+
+/* ================= MISMATCH ================= */
+
+function handleMismatch(){
+
+  const item =
+    diagnosticItems[currentIndex];
+
+  currentAttempts++;
+  currentMismatchAttempts++;
+
+  // Keep difficult words in the practice queue even if a later retry succeeds.
+  if(!practiceQueue.some(x => x.index === currentIndex)){
+    practiceQueue.push({
+      index: currentIndex,
+      sound: item.sound,
+      word: item.word,
+      ipa: item.ipa,
+      position: item.position,
+      difficulty: item.difficulty,
+      reason: "Repeated recognition mismatch"
+    });
+  }
+
+  document
+    .getElementById("attemptCounter")
+    .textContent =
+    `Attempts: ${currentAttempts}`;
+
+  document
+    .getElementById("status")
+    .textContent =
+    "The computer heard a different word.";
+
+  document
+    .getElementById("resultMessage")
+    .innerHTML = `
+
+      <div class="result-message result-try">
+
+        <strong>
+          ⚠️ The computer heard a different word.
+        </strong>
+
+        <br><br>
+
+        Target:
+        <strong>${item.word}</strong>
+
+        <br>
+
+        Heard:
+        <strong>${currentTranscript}</strong>
+
+        <br><br>
+
+        This is a speech-recognition result.
+        It is <strong>not by itself a definite
+        pronunciation diagnosis.</strong>
+
+      </div>
+
+  `;
+
+  document
+    .getElementById("decisionControls")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("retryButton")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("nextButton")
+    .classList.add("hidden");
+
+  const reviewButton = document.getElementById("reviewButton");
+  if(currentMismatchAttempts >= MAX_MISMATCH_ATTEMPTS){
+    reviewButton.classList.remove("hidden");
+  }else{
+    reviewButton.classList.add("hidden");
+  }
+
+}
+
+
+/* ================= MARK FOR REVIEW ================= */
+
+function markCurrentForReview(){
+
+  const item = diagnosticItems[currentIndex];
+
+  if(!finaliseCurrentItem("needs-review", currentTranscript)){
+    return;
+  }
+
+  if(!skippedItems.some(x => x.index === currentIndex)){
+    // This list remains specifically for intentional skips.
+  }
+
+  document.getElementById("status").textContent =
+    "Marked for review. Moving to the next item.";
+
+  nextQuestion();
+
+}
+
+
+/* ================= RETRY ================= */
+
+function retryCurrentWord(){
+
+  document
+    .getElementById("decisionControls")
+    .classList.add("hidden");
+
+  document.getElementById("reviewButton").classList.add("hidden");
+
+  document
+    .getElementById("resultMessage")
+    .innerHTML = "";
+
+  document
+    .getElementById("transcriptBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("status")
+    .textContent =
+    "Ready. Try the word again.";
+
+  currentTranscript = "";
+
+  recognitionHandled = false;
+
+  recognitionGotResult = false;
+
+  resetRecordButton();
+
+}
+
+
+/* ================= SKIP ================= */
+
+function skipCurrentWord(){
+
+  const item = diagnosticItems[currentIndex];
+  if(!item) return;
+
+  // If a speech event finalised this item at the same moment as the click,
+  // treat Skip & Continue as a navigation request rather than leaving the UI stuck.
+  if(finalizedIndices.has(currentIndex)){
+    recognitionHandled = true;
+    ignoreLateRecognitionEnd = !!recognitionActive;
+    stopRecognitionIfNeeded();
+    advanceAfterSkip_();
+    return;
+  }
+
+  // Claim the click before stopping the microphone so its late events cannot
+  // change the result or prevent navigation.
+  recognitionHandled = true;
+  ignoreLateRecognitionEnd = !!recognitionActive;
+  stopRecognitionIfNeeded();
+  recognitionHandled = true;
+
+  if(!skippedItems.some(x => x.index === currentIndex)){
+    skippedItems.push({
+      index: currentIndex,
+      sound: item.sound,
+      word: item.word,
+      ipa: item.ipa,
+      position: item.position,
+      attempts: currentAttempts
+    });
+  }
+
+  if(!practiceQueue.some(x => x.index === currentIndex)){
+    practiceQueue.push({
+      index: currentIndex,
+      sound: item.sound,
+      word: item.word,
+      ipa: item.ipa,
+      position: item.position,
+      difficulty: item.difficulty,
+      reason: "Skipped by learner"
+    });
+  }
+
+  if(!finaliseCurrentItem("skipped", currentTranscript)){
+    // A race may have finalised the item between the initial check and here.
+    advanceAfterSkip_();
+    return;
+  }
+
+  document.getElementById("reviewButton").classList.add("hidden");
+  document.getElementById("status").textContent =
+    `Skipped “${item.word}”. Loading the next question…`;
+  document.getElementById("resultMessage").innerHTML =
+    `<div class="result-message result-skip"><strong>⏭️ Skipped</strong><br><br><strong>${item.word}</strong> has been added to your <strong>Practice Queue</strong>.</div>`;
+
+  advanceAfterSkip_();
+}
+
+function advanceAfterSkip_(){
+  // A single navigation path is shared by normal skips and click/result races.
+  currentIndex++;
+  if(currentIndex >= diagnosticItems.length){
+    showResults();
+  }else{
+    loadQuestion();
+  }
+}
+
+/* ================= NEXT QUESTION ================= */
+
+function nextQuestion(){
+
+  // A recognised, skipped or review-marked item must be finalised before advancing.
+  if(!finalizedIndices.has(currentIndex)){
+    return;
+  }
+
+  stopRecognitionIfNeeded();
+
+  if(
+    currentIndex >=
+    diagnosticItems.length - 1
+  ){
+
+    showResults();
+
+    return;
+
+  }
+
+  currentIndex++;
+
+  loadQuestion();
+
+}
+
+
+/* ================= STOP RECOGNITION ================= */
+
+function stopRecognitionIfNeeded(){
+
+  // Mark the current recognition cycle as handled before stopping it.
+  // Some browsers fire onend after Skip/Next; that late event must not
+  // be mistaken for a microphone failure on the next question.
+  if(recognitionActive){
+    recognitionHandled = true;
+    ignoreLateRecognitionEnd = true;
+  }
+
+  if(
+    recognition &&
+    recognitionActive
+  ){
+
+    try{
+
+      recognition.stop();
+
+    }catch(e){
+
+      console.log(e);
+
+    }
+
+  }
+
+  recognitionActive = false;
+
+  resetRecordButton();
+
+}
+
+
+/* ================= RESET MIC ================= */
+
+function resetRecordButton(){
+
+  const mic =
+    document.getElementById("micButton");
+
+  if(!mic){
+
+    return;
+
+  }
+
+  mic.classList.remove("recording");
+
+  mic.textContent = "🎙️";
+
+}
+
+
+/* ================= EXIT ================= */
+
+function confirmExit(){
+
+  const leave =
+    confirm(
+      "Are you sure you want to exit this diagnostic test? Any unfinished results will be discarded."
+    );
+
+  if(leave){
+
+    stopRecognitionIfNeeded();
+
+    showHome();
+
+  }
+
+}
+
+
+/* ================= RESULTS ================= */
+
+function showResults(){
+
+  stopRecognitionIfNeeded();
+
+  hideAllScreens();
+
+  document
+    .getElementById("resultsScreen")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("resultStudent")
+    .textContent =
+    `${currentStudent.name} • ${currentStudent.id}`;
+
+  const recognised =
+    testResults.filter(
+      x => x.status === "recognised"
+    ).length;
+
+  const skipped =
+    testResults.filter(x => x.status === "skipped").length;
+
+  const needsReview =
+    testResults.filter(x => x.status === "needs-review").length;
+
+  const unfinalised = diagnosticItems.length - testResults.length;
+
+  document
+    .getElementById("totalResult")
+    .textContent =
+    diagnosticItems.length;
+
+  document
+    .getElementById("recognisedResult")
+    .textContent =
+    recognised;
+
+  document
+    .getElementById("skippedResult")
+    .textContent =
+    skipped;
+
+  document
+    .getElementById("failedResult")
+    .textContent = needsReview + unfinalised;
+
+  renderDiagnosticSummary();
+
+  renderPriorityPractice();
+
+  renderPracticeQueue();
+
+  const saveStatus = document.getElementById("saveStatus");
+  if(saveStatus){
+    saveStatus.textContent = "Local test complete. Results have NOT been saved to Google Sheets. Backend connection will be added and tested separately.";
+  }
+
+}
+
+
+/* ================= SAVE RESULTS — DISABLED IN EXTERNAL TEST ================= */
+
+function saveDiagnosticResults(isRetry){
+  const status = document.getElementById("saveStatus");
+  if(status){
+    status.textContent = "Saving is disabled in this microphone-test build. Results have not been sent to Google Sheets.";
+  }
+}
+
+
+/* ================= DIAGNOSTIC SUMMARY ================= */
+
+function renderDiagnosticSummary(){
+
+  const container =
+    document.getElementById(
+      "diagnosticSummary"
+    );
+
+  const soundMap = {};
+
+
+  diagnosticItems.forEach(
+    (item,index) => {
+
+      if(!soundMap[item.sound]){
+
+        soundMap[item.sound] = {
+
+          total:0,
+
+          recognised:0,
+
+          skipped:0,
+
+          needsReview:0,
+
+          attempts:0
+
+        };
+
+      }
+
+      soundMap[item.sound].total++;
+
+    }
+  );
+
+
+  testResults.forEach(
+    result => {
+
+      if(!soundMap[result.sound]){
+
+        return;
+
+      }
+
+      if(result.status === "recognised"){
+
+        soundMap[
+          result.sound
+        ].recognised++;
+
+      }
+
+      if(result.status === "skipped"){
+        soundMap[result.sound].skipped++;
+      }
+
+      if(result.status === "needs-review"){
+        soundMap[result.sound].needsReview++;
+      }
+
+      soundMap[
+        result.sound
+      ].attempts +=
+        result.attempts || 0;
+
+    }
+  );
+
+
+  let html = `
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Sound</th>
+
+          <th>Items</th>
+
+          <th>Recognised</th>
+
+          <th>Skipped</th>
+
+          <th>Needs Review</th>
+
+          <th>Result</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+  `;
+
+
+  Object.keys(soundMap).forEach(
+    sound => {
+
+      const data =
+        soundMap[sound];
+
+      let resultText =
+        "Needs Practice";
+
+      let resultClass =
+        "status-warning";
+
+      if(data.recognised === data.total){
+
+        resultText =
+          "Good";
+
+        resultClass =
+          "status-good";
+
+      }
+
+      else if(data.recognised === 0 &&
+              data.skipped + data.needsReview === data.total){
+
+        resultText =
+          "Review";
+
+        resultClass =
+          "status-danger";
+
+      }
+
+
+      html += `
+
+        <tr>
+
+          <td>
+            <strong>${sound}</strong>
+          </td>
+
+          <td>
+            ${data.total}
+          </td>
+
+          <td>
+            ${data.recognised}
+          </td>
+
+          <td>
+            ${data.skipped}
+          </td>
+
+          <td>
+            ${data.needsReview}
+          </td>
+
+          <td class="${resultClass}">
+            ${resultText}
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html += `
+
+      </tbody>
+
+    </table>
+
+  `;
+
+  container.innerHTML = html;
+
+}
+
+
+/* ================= PRIORITY PRACTICE ================= */
+
+function renderPriorityPractice(){
+
+  const container =
+    document.getElementById(
+      "priorityPractice"
+    );
+
+  if(practiceQueue.length === 0){
+
+    container.innerHTML = `
+
+      <div class="result-message result-success">
+
+        No priority words were identified by this recognition check.
+        This does not prove that every sound was pronounced accurately.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  /*
+    Group practice queue by sound.
+  */
+
+  const groups = {};
+
+  practiceQueue.forEach(item => {
+
+    if(!groups[item.sound]){
+
+      groups[item.sound] = [];
+
+    }
+
+    groups[item.sound].push(item);
+
+  });
+
+
+  let html = "";
+
+  Object.keys(groups).forEach(sound => {
+
+    html += `
+
+      <div class="queue-item">
+
+        <div>
+
+          <strong>
+            ${sound}
+          </strong>
+
+          <div class="small">
+
+            ${groups[sound]
+              .map(x => x.word)
+              .join(", ")}
+
+          </div>
+
+        </div>
+
+        <div>
+          Needs Practice
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+
+  container.innerHTML = html;
+
+}
+
+
+/* ================= PRACTICE QUEUE ================= */
+
+function renderPracticeQueue(){
+
+  const container =
+    document.getElementById(
+      "practiceQueue"
+    );
+
+  if(practiceQueue.length === 0){
+
+    container.innerHTML = `
+
+      <div class="result-message result-success">
+
+        No words need follow-up practice from this recognition check.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  let html = "";
+
+  practiceQueue.forEach(
+    (item,index) => {
+
+      html += `
+
+        <div class="queue-item">
+
+          <div>
+
+            <strong>
+              ${index + 1}.
+              ${item.word}
+            </strong>
+
+            <div class="small">
+
+              ${item.sound}
+              • ${item.ipa}
+              • ${item.position}
+              • ${item.difficulty}
+
+            </div>
+
+          </div>
+
+          <button
+            class="primary"
+            onclick="speakQueueWord('${item.word.replace(/'/g,"\\'")}')">
+
+            🔊 Listen
+
+          </button>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  container.innerHTML = html;
+
+}
+
+
+/* ================= QUEUE AUDIO ================= */
+
+function speakQueueWord(word){
+
+  if(!("speechSynthesis" in window)){
+
+    return;
+
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(word);
+
+  const voices =
+    speechSynthesis.getVoices();
+
+  const britishVoice =
+    voices.find(
+      voice =>
+      voice.lang &&
+      voice.lang.toLowerCase()
+      .startsWith("en-gb")
+    );
+
+  if(britishVoice){
+
+    utterance.voice =
+      britishVoice;
+
+  }
+
+  utterance.lang = "en-GB";
+
+  utterance.rate = 0.78;
+
+  speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* ================= START AGAIN ================= */
+
+function startAgain(){
+  startDiagnostic();
+}
+
+
+/* ================= INITIAL ================= */
+
+showHome();
+
+
+</script>
+
+</body>
+</html>
