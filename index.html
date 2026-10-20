@@ -2064,6 +2064,23 @@ function handleCorrect(){
   document
     .getElementById("nextButton")
     .classList.remove("hidden");
+    document
+    .getElementById("nextButton")
+    .classList.remove("hidden");
+
+  // Automatically advance after successful recognition.
+  const recognisedIndex = currentIndex;
+
+  setTimeout(() => {
+    if (
+      currentIndex === recognisedIndex &&
+      finalizedIndices.has(recognisedIndex)
+    ) {
+      nextQuestion();
+    }
+  }, 1200);
+
+}
 
 }
 
