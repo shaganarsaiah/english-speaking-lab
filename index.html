@@ -582,6 +582,45 @@ th{
 
   </div>
 
+  <div id="learnerLoginPanel" class="notice" style="margin-top:18px;">
+  <h3 style="margin-top:0;">Learner Login</h3>
+  <p>Sign in to save your pronunciation diagnostic results.</p>
+
+  <label for="learnerType"><strong>Account type</strong></label>
+  <select id="learnerType" style="display:block;width:100%;padding:10px;margin:8px 0 14px;">
+    <option value="STUDENT">School Student</option>
+    <option value="INDIVIDUAL">Individual Learner</option>
+  </select>
+
+  <div id="studentLoginFields">
+    <label for="studentUsername"><strong>Student ID</strong></label>
+    <input id="studentUsername" type="text" autocomplete="username"
+      placeholder="Enter your Student ID"
+      style="display:block;width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+
+    <label for="studentPassword"><strong>Password</strong></label>
+    <input id="studentPassword" type="password" autocomplete="current-password"
+      placeholder="Enter your password"
+      style="display:block;width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+  </div>
+
+  <div id="individualLoginFields" class="hidden">
+    <label for="individualGmail"><strong>Gmail address</strong></label>
+    <input id="individualGmail" type="email" autocomplete="username"
+      placeholder="Enter your Gmail address"
+      style="display:block;width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+
+    <label for="individualPassword"><strong>Password</strong></label>
+    <input id="individualPassword" type="password" autocomplete="current-password"
+      placeholder="Enter your password"
+      style="display:block;width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+  </div>
+
+  <button id="learnerLoginButton" type="button" onclick="loginLearner_TEST()">
+    Sign In
+  </button>
+  <p id="learnerLoginMessage" role="status" aria-live="polite"></p>
+</div>
   <div class="notice" role="status" style="margin-top:18px;"><strong>External TEST build:</strong> microphone and diagnostic flow only. Learner login and spreadsheet saving are intentionally disabled until the secure backend bridge is implemented.</div>
 
   <div style="text-align:center;margin-top:25px;">
@@ -1422,13 +1461,22 @@ function startAuthenticatedDiagnostic(){
 
 /* ================= START DIAGNOSTIC ================= */
 
-function startDiagnostic(){
+function startDiagnostic() {
+  if (!currentSessionToken || !currentStudent) {
+    currentStudent = {
+      id: "LOCAL-TEST",
+      name: "Microphone Test",
+      className: ""
+    };
+    currentLearnerType = "LOCAL_TEST";
+  }
 
-  currentStudent = { id: "LOCAL-TEST", name: "Microphone Test", className: "" };
-  diagnosticRunId = "local_diag_" + Date.now() + "_" + Math.random().toString(36).slice(2,8);
+  diagnosticRunId =
+    "local_diag_" + Date.now() + "_" +
+    Math.random().toString(36).slice(2, 8);
+
   diagnosticSaveInProgress = false;
   diagnosticSaved = false;
-
   currentIndex = 0;
 
   currentAttempts = 0;
@@ -2866,6 +2914,141 @@ function startAgain(){
   startDiagnostic();
 }
 
+
+  
+/* =========================================================
+   TEST LEARNER LOGIN — Cloudflare Worker
+   ========================================================= */
+
+const LEARNER_TEST_WORKER_URL =
+  "https://english-lab-test-bridge.shaganarsaiah74.workers.dev/";
+
+const learnerTypeSelect = document.getElementById("learnerType");
+
+if (learnerTypeSelect) {
+  learnerTypeSelect.addEventListener("change", function () {
+    const isStudent = this.value === "STUDENT";
+
+    document.getElementById("studentLoginFields").classList.toggle("hidden", !isStudent);
+    document.getElementById("individualLoginFields").classList.toggle("hidden", isStudent);
+
+    const message = document.getElementById("learnerLoginMessage");
+    if (message) message.textContent = "";
+  });
+}
+
+async function loginLearner_TEST() {
+  const type = document.getElementById("learnerType").value;
+  const message = document.getElementById("learnerLoginMessage");
+  const button = document.getElementById("learnerLoginButton");
+
+  let request;
+
+  if (type === "STUDENT") {
+    const username = document.getElementById("studentUsername").value.trim();
+    const password = document.getElementById("studentPassword").value;
+
+    if (!username || !password) {
+      message.textContent = "Enter your student username and password.";
+      return;
+    }
+
+    request = {
+      action: "loginStudent_TEST",
+      username: username,
+      password: password
+    };
+  } else {
+    const gmail = document.getElementById("individualGmail").value.trim();
+    const password = document.getElementById("individualPassword").value;
+
+    if (!gmail || !password) {
+      message.textContent = "Enter your Gmail address and password.";
+      return;
+    }
+
+    request = {
+      action: "loginIndividualLearner_TEST",
+      gmail: gmail,
+      password: password
+    };
+  }
+
+  button.disabled = true;
+  message.textContent = "Signing in…";
+
+  try {
+    const response = await fetch(LEARNER_TEST_WORKER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=UTF-8"
+      },
+      body: JSON.stringify(request)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "Login request failed.");
+    }
+
+    const result = data.result;
+
+    if (!result || !result.success || !result.token) {
+      throw new Error(
+        (result && result.error) || "Login failed. Check your credentials or account approval."
+      );
+    }
+
+    currentSessionToken = result.token;
+    currentLearnerType = type;
+
+    if (type === "STUDENT") {
+      const student = result.student;
+
+      if (!student) {
+        throw new Error("The server did not return student account details.");
+      }
+
+      currentStudent = {
+        id: student.studentID,
+        name: student.studentName,
+        className: student.className || ""
+      };
+    } else {
+      const learner = result.individual;
+
+      if (!learner) {
+        throw new Error("The server did not return individual learner details.");
+      }
+
+      currentStudent = {
+        id: learner.individualID,
+        name: learner.gmail || learner.individualID,
+        className: ""
+      };
+    }
+
+    message.textContent =
+      "Login successful. Welcome, " + currentStudent.name + ". You can now start the diagnostic.";
+
+    const panel = document.getElementById("learnerLoginPanel");
+    if (panel) {
+      const fields = panel.querySelectorAll("input, select");
+      fields.forEach(function (field) {
+        field.disabled = true;
+      });
+    }
+
+    button.textContent = "Signed In";
+  } catch (error) {
+    console.error("TEST learner login error:", error);
+    message.textContent =
+      "Login could not be completed: " + (error.message || "Please try again.");
+  } finally {
+    button.disabled = false;
+  }
+}
 
 /* ================= INITIAL ================= */
 
