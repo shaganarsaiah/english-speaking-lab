@@ -2981,7 +2981,7 @@ async function loginLearner_TEST() {
     const response = await fetch(LEARNER_TEST_WORKER_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain;charset=UTF-8"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(request)
     });
